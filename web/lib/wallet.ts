@@ -31,9 +31,12 @@ export async function getWalletClient() {
 
 export async function getConnectedAddress(): Promise<string | null> {
   if (!cached) return null;
-  // genlayer-js attaches the active account once connected.
-  const acct = (cached as any).account;
-  return acct?.address ?? null;
+  try {
+    const addrs = await cached.getAddresses();
+    return addrs?.[0] ?? null;
+  } catch {
+    return null;
+  }
 }
 
 // --- write helpers ------------------------------------------------------

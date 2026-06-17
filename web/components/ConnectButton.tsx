@@ -22,7 +22,7 @@ export function ConnectButton() {
       try {
         const c: any = await getWalletClient();
         const b = await c.getBalance({ address: addr as `0x${string}` });
-        if (alive) setBal(BigInt(b ?? 0));
+        if (alive) setBal(BigInt(String(b ?? 0)));
       } catch { /* transient */ }
     };
     fetchBal();
@@ -33,8 +33,9 @@ export function ConnectButton() {
   async function connect() {
     setBusy(true); setErr(null);
     try {
-      await getWalletClient();
-      setAddr(await getConnectedAddress());
+      const c = await getWalletClient();
+      const addrs = await (c as any).getAddresses();
+      setAddr(addrs?.[0] ?? null);
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : String(e));
     } finally {
