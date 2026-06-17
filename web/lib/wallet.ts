@@ -20,8 +20,11 @@ let cached: ReturnType<typeof createClient> | null = null;
 export async function getWalletClient() {
   if (cached) return cached;
   const c = createClient({ chain });
-  // Connect via MetaMask Snap. Throws if user rejects or MetaMask is absent.
-  await c.connect();
+  // Install Snap + switch MetaMask to the correct network
+  const networkName = target === "bradbury" ? "bradbury" : target === "localnet" ? "localnet" : "studionet";
+  await (c as any).connect(networkName);
+  // Request account access (eth_requestAccounts) — connect() only installs the Snap
+  await c.requestAddresses();
   if (typeof (c as any).initializeConsensusSmartContract === "function") {
     await (c as any).initializeConsensusSmartContract();
   }
