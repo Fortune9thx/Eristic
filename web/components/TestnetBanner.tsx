@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 
 export function TestnetBanner() {
   const [dismissed, setDismissed] = useState(false);
@@ -16,15 +15,6 @@ export function TestnetBanner() {
             style={{ background: "rgba(139,92,246,0.2)", color: "#a78bfa", border: "1px solid rgba(139,92,246,0.35)" }}>
             ⚠ TESTNET
           </span>
-          <span style={{ color: "rgba(237,235,230,0.5)" }}>
-            GenLayer Bradbury Testnet — GEN tokens have{" "}
-            <strong style={{ color: "rgba(237,235,230,0.75)" }}>no real-world value.</strong>
-          </span>
-          <Link href="https://testnet-faucet.genlayer.foundation" target="_blank" rel="noreferrer"
-            className="hidden sm:inline transition-colors"
-            style={{ color: "#a78bfa", textDecoration: "underline" }}>
-            Get free GEN →
-          </Link>
         </div>
         <button onClick={() => setDismissed(true)}
           className="text-xs font-mono shrink-0 transition-opacity hover:opacity-100 opacity-40"
