@@ -13,10 +13,14 @@
     "smoke": "tsx scripts/smoke.ts"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.2.11",
+    "@tanstack/react-query": "^5.101.0",
     "genlayer-js": "^1.1.8",
     "next": "^15.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "viem": "^2.52.2",
+    "wagmi": "^2.19.5"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

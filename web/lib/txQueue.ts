@@ -83,9 +83,9 @@ export async function trackTx<T extends `0x${string}`>(
 }
 
 async function pollUntilTerminal(id: string, hash: `0x${string}`) {
-  const { getWalletClient } = await import("./wallet");
-  const c: any = await getWalletClient().catch(() => null);
-  if (!c) { setTxStatus(id, "ERROR", "wallet client unavailable"); return; }
+  const { publicClient } = await import("./genlayer");
+  const c: any = publicClient;
+  if (!c) { setTxStatus(id, "ERROR", "client unavailable"); return; }
   // Cap at 90 min — past that, surface as stuck.
   const deadline = Date.now() + 90 * 60_000;
   while (Date.now() < deadline) {
